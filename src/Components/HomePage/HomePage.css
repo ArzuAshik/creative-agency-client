@@ -1,4 +1,5 @@
-header.header {
+header.header,
+footer.footer {
   background-color: #fbd062;
   position: relative;
 }
@@ -13,11 +14,11 @@ header.header::after {
   border-left: 100vw solid #fbd062;
   border-top: 0 solid #fbd062;
   border-right: 0 solid transparent;
-  border-bottom: 80px solid transparent;
+  border-bottom: 120px solid transparent;
   overflow: hidden;
 }
 .brand-logo {
-  margin-top: 150px;
+  margin-top: 200px;
   display: flex;
   justify-content: space-between;
 }
@@ -25,8 +26,17 @@ header.header::after {
   height: 36px;
   width: auto;
 }
-.service-section {
+.service-section,
+.feedback-section {
   margin: 150px auto;
+}
+.service-item {
+  transition: 0.3s;
+}
+.service-item:hover {
+  background: #ffffff;
+  box-shadow: 0px 4px 80px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 .brand-color {
   color: #7ab259;
