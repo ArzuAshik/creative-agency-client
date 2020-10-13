@@ -1,0 +1,33 @@
+header.header {
+  background-color: #fbd062;
+  position: relative;
+}
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .active > .nav-link {
+  border-bottom: 2px solid #7ab259;
+}
+header.header::after {
+  content: "";
+  display: block;
+  position: absolute;
+  border-left: 100vw solid #fbd062;
+  border-top: 0 solid #fbd062;
+  border-right: 0 solid transparent;
+  border-bottom: 80px solid transparent;
+  overflow: hidden;
+}
+.brand-logo {
+  margin-top: 150px;
+  display: flex;
+  justify-content: space-between;
+}
+.brand-logo img {
+  height: 36px;
+  width: auto;
+}
+.service-section {
+  margin: 150px auto;
+}
+.brand-color {
+  color: #7ab259;
+}
