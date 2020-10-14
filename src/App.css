@@ -20,3 +20,7 @@
   background-color: #f4f7fc;
   margin: 0;
 }
+
+.sidebar-active {
+  color: #009444;
+}

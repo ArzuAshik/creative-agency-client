@@ -6,23 +6,24 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import { Link } from "react-router-dom";
-import AdminSidebar from "../AdminSidebar/AdminSidebar";
 
 const UserSidebar = () => {
+  const page = window.location.pathname.split("/");
+
   return (
     <div className="sidebar">
       <ul>
-        <li>
+        <li className={page[2] === "order" && "sidebar-active"}>
           <Link to="/dashboard/order">
             <FontAwesomeIcon icon={faShoppingCart} /> Order
           </Link>
         </li>
-        <li>
+        <li className={page[2] === "service-status" && "sidebar-active"}>
           <Link to="/dashboard/service-status">
             <FontAwesomeIcon icon={faCubes} /> Service list
           </Link>
         </li>
-        <li>
+        <li className={page[2] === "review" && "sidebar-active"}>
           <Link to="/dashboard/review">
             <FontAwesomeIcon icon={faCommentDots} /> Review
           </Link>
