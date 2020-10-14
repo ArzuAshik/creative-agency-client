@@ -1,0 +1,20 @@
+.login-area {
+  max-width: 550px;
+  margin: 0 auto;
+  border: 1px solid gray;
+  min-height: 450px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.google-login {
+  border: 1px solid gray;
+  border-radius: 50px;
+  position: relative;
+  padding: 8px;
+  display: flex;
+}
+.google-login span {
+  margin-left: 40%;
+  transform: translateX(-50%);
+}
