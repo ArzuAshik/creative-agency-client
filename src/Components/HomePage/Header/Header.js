@@ -18,7 +18,9 @@ const Header = () => {
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus
                 commodo ipsum duis laoreet maecenas. Feugiat
               </p>
-              <button className="btn btn-dark px-5">Hire Us</button>
+              <a href="#services">
+                <button className="btn btn-dark px-5">Hire Us</button>
+              </a>
             </div>
             <div className="col-md-6">
               <img className="img-fluid" src={homeHero} alt="" />

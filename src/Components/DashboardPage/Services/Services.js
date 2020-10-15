@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
+import { UserContext } from "../../../App";
 import DashboardHeader from "../DashboardHeader/DashboardHeader";
-import UserSidebar from "../UserSidebar/UserSidebar";
+import AdminSidebar from "../AdminSidebar/AdminSidebar";
 import SingleService from "./SingleService";
 
 const Services = () => {
+  document.title = "ALL Services | Creative Agency";
+  const [orders, setOrders] = useState([]);
+  const [loginUser, setLoginUser] = useContext(UserContext);
+
+  useEffect(() => {
+    fetch("https://ar-creative-agency-server.herokuapp.com/orders")
+      .then((response) => response.json())
+      .then((data) => setOrders(data));
+  }, []);
   return (
     <>
+      {!loginUser.isAdmin && <Redirect to="/dashboard/order" />}
       <DashboardHeader />
       <div className="row p-4 ml-5 mt-4">
         <div className="col-3">
-          <UserSidebar />
+          <AdminSidebar />
         </div>
         <div className="col-9 p-5 dashboard-content">
           <div style={{ borderRadius: "1.25rem" }} className="bg-white p-5">
@@ -24,7 +36,13 @@ const Services = () => {
                 </tr>
               </thead>
               <tbody>
-                <SingleService />
+                {orders.length > 0 ? (
+                  orders.map((info) => <SingleService info={info} />)
+                ) : (
+                  <td colspan="5" className="text-center display-4 text-muted">
+                    Empty
+                  </td>
+                )}
               </tbody>
             </table>
           </div>

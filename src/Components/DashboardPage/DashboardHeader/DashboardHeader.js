@@ -1,8 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
+import { UserContext } from "../../../App";
 import logo from "../../../images/logo.png";
 
 const DashboardHeader = () => {
+  const [loginUser, setLoginUser] = useContext(UserContext);
+
   const page = window.location.pathname.split("/");
   let pageName;
   if (page[2] === "order") {
@@ -20,6 +23,13 @@ const DashboardHeader = () => {
   } else {
     pageName = " ";
   }
+
+  let history = useHistory();
+  function handleSignOut() {
+    sessionStorage.removeItem("creativeUser");
+    setLoginUser({});
+    history.push("/");
+  }
   return (
     <div className="row mt-5">
       <div className="col-3 ml-5">
@@ -29,7 +39,15 @@ const DashboardHeader = () => {
       </div>
       <div className="col-8 d-flex justify-content-between">
         <h4>{pageName}</h4>
-        <h4>User Name</h4>
+        <h4 className="user-name">
+          {loginUser.name || "User Name"}
+          <button
+            onClick={handleSignOut}
+            className="btn btn-danger user-logout"
+          >
+            Logout
+          </button>
+        </h4>
       </div>
     </div>
   );

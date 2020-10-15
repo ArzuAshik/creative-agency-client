@@ -13,17 +13,21 @@ const UserSidebar = () => {
   return (
     <div className="sidebar">
       <ul>
-        <li className={page[2] === "order" && "sidebar-active"}>
+        <li className={page[2] === "order" ? "sidebar-active" : undefined}>
           <Link to="/dashboard/order">
             <FontAwesomeIcon icon={faShoppingCart} /> Order
           </Link>
         </li>
-        <li className={page[2] === "service-status" && "sidebar-active"}>
+        <li
+          className={
+            page[2] === "service-status" ? "sidebar-active" : undefined
+          }
+        >
           <Link to="/dashboard/service-status">
             <FontAwesomeIcon icon={faCubes} /> Service list
           </Link>
         </li>
-        <li className={page[2] === "review" && "sidebar-active"}>
+        <li className={page[2] === "review" ? "sidebar-active" : undefined}>
           <Link to="/dashboard/review">
             <FontAwesomeIcon icon={faCommentDots} /> Review
           </Link>

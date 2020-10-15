@@ -24,3 +24,18 @@
 .sidebar-active {
   color: #009444;
 }
+
+.user-logout {
+  display: none;
+  position: absolute;
+  top: 35px;
+  right: 28px;
+}
+
+.user-name:hover .user-logout {
+  display: block;
+}
+
+.loading {
+  text-align: center;
+}

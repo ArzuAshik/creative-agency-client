@@ -1,9 +1,73 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import { UserContext } from "../../../App";
 import DashboardHeader from "../DashboardHeader/DashboardHeader";
 import UserSidebar from "../UserSidebar/UserSidebar";
 import "./Order.css";
 
 const Order = () => {
+  document.title = "Order - Dashboard | Creative Agency";
+  const [loginUser, setLoginUser] = useContext(UserContext);
+  const [fileInput, setFileInput] = useState(null);
+  const [formInput, setFormInput] = useState({});
+  let history = useHistory();
+
+  const serviceID = useParams().serviceID;
+  useEffect(() => {
+    fetch(
+      `https://ar-creative-agency-server.herokuapp.com/singleService/${serviceID}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        const newInfo = { ...formInput };
+        newInfo.service = data.title;
+        setFormInput(newInfo);
+      });
+  }, []);
+
+  const handleFile = (e) => {
+    setFileInput(e.target.files[0]);
+  };
+
+  function handleInput(e) {
+    const newInput = { ...formInput };
+    newInput[e.target.name] = e.target.value;
+    setFormInput(newInput);
+  }
+  const handleOnBlur = (e) => {
+    if (e.target.name === "name") {
+      e.target.value.length > 3
+        ? handleInput(e)
+        : alert("Please Enter Your FUll Name.");
+    } else if (e.target.name === "details") {
+      e.target.value.length > 5
+        ? handleInput(e)
+        : alert("Please add some details");
+    } else if (e.target.name === "price") {
+      e.target.value.length > 0 ? handleInput(e) : alert("Price must Require!");
+    }
+  };
+
+  const handleSubmit = (e) => {
+    if (formInput.details && formInput.price && fileInput) {
+      //submit form
+      const formData = new FormData();
+      formData.append("file", fileInput);
+      formData.append("name", loginUser.name);
+      formData.append("email", loginUser.email);
+      formData.append("service", formInput.service);
+      formData.append("serviceID", serviceID);
+      formData.append("details", formInput.details);
+      formData.append("price", formInput.price);
+      fetch("https://ar-creative-agency-server.herokuapp.com/submit-order", {
+        method: "POST",
+        body: formData,
+      }).then((res) => history.push("/dashboard/service-status"));
+    } else {
+      alert("Please Fill up the form!");
+    }
+    e.preventDefault();
+  };
   return (
     <>
       <DashboardHeader />
@@ -16,24 +80,35 @@ const Order = () => {
             <div className="col-6">
               <form action="#">
                 <input
+                  name="name"
+                  onBlur={handleOnBlur}
                   required
                   className="form-control p-4"
                   type="text"
                   placeholder="Your name / company’s name"
+                  value={loginUser.name}
                 />
                 <input
+                  readOnly
+                  name="email"
                   required
-                  className="form-control p-4 my-2"
+                  className="form-control p-4 my-2 bg-white"
                   type="text"
                   placeholder="Your email address"
+                  value={loginUser.email}
                 />
                 <input
+                  readOnly
+                  name="service"
                   required
-                  className="form-control p-4 my-2"
+                  className="form-control p-4 my-2 bg-white"
                   type="text"
                   placeholder="Service"
+                  value={formInput.service}
                 />
                 <textarea
+                  name="details"
+                  onBlur={handleOnBlur}
                   required
                   rows="5"
                   className="form-control p-4 my-2"
@@ -43,6 +118,8 @@ const Order = () => {
                 <div className="row">
                   <div className="col-6">
                     <input
+                      name="price"
+                      onBlur={handleOnBlur}
                       required
                       className="form-control p-4"
                       type="text"
@@ -50,11 +127,18 @@ const Order = () => {
                     />
                   </div>
                   <div className="col-6 custom-file">
-                    <label for="upload-file">Upload Project File</label>
-                    <input required id="upload-file" type="file" />
+                    <label htmlFor="upload-file">Upload Project File</label>
+                    <input
+                      name="file"
+                      onChange={handleFile}
+                      required
+                      id="upload-file"
+                      type="file"
+                    />
                   </div>
                 </div>
                 <button
+                  onClick={handleSubmit}
                   type="submit"
                   className="btn bg-white px-5 py-2 mt-2 border"
                 >

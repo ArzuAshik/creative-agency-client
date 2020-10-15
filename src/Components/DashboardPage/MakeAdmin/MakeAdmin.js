@@ -1,24 +1,50 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { Redirect } from "react-router-dom";
+import { UserContext } from "../../../App";
 import DashboardHeader from "../DashboardHeader/DashboardHeader";
-import UserSidebar from "../UserSidebar/UserSidebar";
+import AdminSidebar from "../AdminSidebar/AdminSidebar";
 
 const MakeAdmin = () => {
+  document.title = "Make Admin | Creative Agency";
+  const [loginUser, setLoginUser] = useContext(UserContext);
+  const [newAdmin, setNewAdmin] = useState("");
+
+  function handleOnBlur(e) {
+    setNewAdmin(e.target.value);
+  }
+
+  function handleSubmit(e) {
+    if (newAdmin) {
+      fetch("https://ar-creative-agency-server.herokuapp.com/makeAdmin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: newAdmin, currentUser: loginUser.email }),
+      }).then(() => {
+        alert(`${newAdmin} is an Admin Now.`);
+      });
+    } else {
+      alert("Please add a valid email!");
+    }
+    e.preventDefault();
+  }
   return (
     <>
+      {!loginUser.isAdmin && <Redirect to="/dashboard/order" />}
       <DashboardHeader />
       <div className="row p-4 ml-5 mt-4">
         <div className="col-3">
-          <UserSidebar />
+          <AdminSidebar />
         </div>
         <div className="col-9 p-5 dashboard-content">
           <div style={{ borderRadius: "1.25rem" }} className="row p-4 bg-white">
-            <form action="#" className="w-100">
+            <form action="#" className="w-100" onSubmit={handleSubmit}>
               <h5>
                 <label for="email">Email</label>
               </h5>
               <div className="row">
                 <div className="col-6">
                   <input
+                    onBlur={handleOnBlur}
                     id="email"
                     required
                     className="form-control p-4 mb-2"

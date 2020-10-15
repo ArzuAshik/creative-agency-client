@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../../App";
 import DashboardHeader from "../DashboardHeader/DashboardHeader";
 import UserSidebar from "../UserSidebar/UserSidebar";
 import OrderedService from "./OrderedService";
 
 const ServiceStatus = () => {
+  document.title = "Service List | Creative Agency";
+  const [loginUser, setLoginUser] = useContext(UserContext);
+  const [serviceList, setServiceList] = useState([]);
+  useEffect(() => {
+    fetch("https://ar-creative-agency-server.herokuapp.com/userOrderList", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: loginUser.email }),
+    })
+      .then((response) => response.json())
+      .then((data) => setServiceList(data));
+  }, []);
   return (
     <>
       <DashboardHeader />
@@ -13,7 +26,9 @@ const ServiceStatus = () => {
         </div>
         <div className="col-9 p-5 dashboard-content">
           <div className="row">
-            <OrderedService />
+            {serviceList.map((service) => (
+              <OrderedService service={service} />
+            ))}
           </div>
         </div>
       </div>

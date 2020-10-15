@@ -1,14 +1,54 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { Redirect } from "react-router-dom";
+import { UserContext } from "../../../App";
 import DashboardHeader from "../DashboardHeader/DashboardHeader";
-import UserSidebar from "../UserSidebar/UserSidebar";
+import AdminSidebar from "../AdminSidebar/AdminSidebar";
 
 const AddService = () => {
+  document.title = "Add Service| Creative Agency";
+  const [formInput, setFormInput] = useState({});
+  const [fileInput, setFileInput] = useState(null);
+  const [loginUser, setLoginUser] = useContext(UserContext);
+
+  const handleFile = (e) => {
+    setFileInput(e.target.files[0]);
+  };
+
+  const handleOnBlur = (e) => {
+    function handleInput() {
+      const newInput = { ...formInput };
+      newInput[e.target.name] = e.target.value;
+      setFormInput(newInput);
+    }
+
+    e.target.value.length > 3
+      ? handleInput()
+      : alert("Please Enter Valid Information.");
+  };
+
+  const handleSubmit = (e) => {
+    if (formInput.title && formInput.description) {
+      //submit form
+      const formData = new FormData();
+      formData.append("file", fileInput);
+      formData.append("title", formInput.title);
+      formData.append("description", formInput.description);
+      fetch("https://ar-creative-agency-server.herokuapp.com/add-service", {
+        method: "POST",
+        body: formData,
+      }).then((res) => alert("Service added."));
+    } else {
+      alert("Please Fill up the form!");
+    }
+    e.preventDefault();
+  };
   return (
     <>
+      {!loginUser.isAdmin && <Redirect to="/dashboard/order" />}
       <DashboardHeader />
       <div className="row p-4 ml-5 mt-4">
         <div className="col-3">
-          <UserSidebar />
+          <AdminSidebar />
         </div>
         <div className="col-9 p-5 dashboard-content">
           <form action="#">
@@ -21,6 +61,8 @@ const AddService = () => {
                   <label for="service-title">Service Title</label>
                 </h5>
                 <input
+                  onBlur={handleOnBlur}
+                  name="title"
                   id="service-title"
                   required
                   className="form-control p-4 mb-2"
@@ -31,6 +73,8 @@ const AddService = () => {
                   <label for="description">Description</label>
                 </h5>
                 <textarea
+                  onBlur={handleOnBlur}
+                  name="description"
                   id="description"
                   required
                   rows="5"
@@ -42,11 +86,17 @@ const AddService = () => {
               <div className="col-6 custom-file w-50">
                 <h5>Icon</h5>
                 <label for="upload-file">Upload Image</label>
-                <input required id="upload-file" type="file" />
+                <input
+                  onChange={handleFile}
+                  required
+                  id="upload-file"
+                  type="file"
+                />
               </div>
             </div>
             <div className="text-right">
               <button
+                onClick={handleSubmit}
                 type="submit"
                 className="btn btn-success px-5 py-2 mt-2 border"
               >

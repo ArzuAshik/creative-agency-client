@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Redirect } from "react-router-dom";
-import DashboardHeader from "./DashboardHeader/DashboardHeader";
-import UserSidebar from "./UserSidebar/UserSidebar";
+import { UserContext } from "../../App";
 
 const DashboardPage = () => {
-  return <Redirect to="/dashboard/order" />;
+  const [loginUser, setLoginUser] = useContext(UserContext);
+  return (
+    <>
+      {loginUser.isAdmin ? (
+        <Redirect to="/dashboard/services" />
+      ) : (
+        <Redirect to="/dashboard/service-status" />
+      )}
+    </>
+  );
 };
 
 export default DashboardPage;

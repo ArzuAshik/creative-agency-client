@@ -7,6 +7,7 @@ import Services from "../Services/Service";
 import Works from "../Works/Works";
 
 const Home = () => {
+  document.title = "Creative Agency";
   return (
     <>
       <Header />

@@ -4,6 +4,10 @@ import React from "react";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
+import work1 from "../../../images/carousel-1.png";
+import work2 from "../../../images/carousel-2.png";
+import work4 from "../../../images/carousel-4.png";
+import work5 from "../../../images/carousel-5.png";
 
 const options = {
   margin: 30,
@@ -32,45 +36,21 @@ const options = {
 const Works = () => {
   return (
     <section className="work-section bg-dark p-5">
-      <h2 className="text-center text-white">
+      <h2 className="text-center text-white mb-5">
         Here are some of <span className="brand-color">our works</span>
       </h2>
       <OwlCarousel className="slider-items owl-carousel" {...options}>
         <div class="item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" />
+          <img src={work1} />
         </div>
         <div class="item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" />
+          <img src={work2} />
         </div>
         <div class="item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" />
+          <img src={work4} />
         </div>
         <div class="item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" />
-        </div>
-        <div class="item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" />
-        </div>
-        <div class="item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" />
-        </div>
-        <div class="item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" />
-        </div>
-        <div class="item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" />
-        </div>
-        <div class="item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" />
-        </div>
-        <div class="item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" />
-        </div>
-        <div class="item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" />
-        </div>
-        <div class="item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" />
+          <img src={work5} />
         </div>
       </OwlCarousel>
     </section>

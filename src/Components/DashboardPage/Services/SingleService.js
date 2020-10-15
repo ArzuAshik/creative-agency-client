@@ -1,36 +1,42 @@
 import React, { useState } from "react";
 
-const SingleService = () => {
-  const pending = { color: "#FF4545" };
-  const done = { color: "#009444" };
-  const going = { color: "#FFBD3E" };
+const SingleService = ({ info }) => {
+  const optionStyle = [
+    { color: "#FF4545" },
+    { color: "#FFBD3E" },
+    { color: "#009444" },
+  ];
 
-  const [selectedOption, setSelectedOption] = useState({});
+  const [selectedOption, setSelectedOption] = useState(info.status);
   function statusChange(e) {
-    e.target.value === "pending" && setSelectedOption({ color: "#FF4545" });
-    e.target.value === "done" && setSelectedOption({ color: "#009444" });
-    e.target.value === "going" && setSelectedOption({ color: "#FFBD3E" });
+    setSelectedOption(e.target.value);
+    fetch("https://ar-creative-agency-server.herokuapp.com/updateOrderStatus", {
+      method: "PATCH",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ id: info._id, status: e.target.value }),
+    });
   }
   return (
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <td scope="row">{info.name}</td>
+      <td>{info.email}</td>
+      <td>{info.service}</td>
+      <td>{info.details}</td>
       <td>
         <select
+          value={selectedOption}
           onChange={statusChange}
-          style={selectedOption}
+          style={optionStyle[selectedOption]}
           className="border-0"
         >
-          <option value="pending" style={pending}>
+          <option value="0" style={optionStyle[0]}>
             Pending
           </option>
-          <option value="done" style={done}>
-            Done
-          </option>
-          <option value="going" style={going}>
+          <option value="1" style={optionStyle[1]}>
             On going
+          </option>
+          <option value="2" style={optionStyle[2]}>
+            Done
           </option>
         </select>
       </td>
