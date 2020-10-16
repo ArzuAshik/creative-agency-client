@@ -10,7 +10,7 @@ const Services = ({ service }) => {
           height="74"
           width="74"
           src={`data:image/jpeg;base64,${service.img.img}`}
-          alt=""
+          alt={service.title}
         />
         <h5 className="my-2">{service.title}</h5>
         <p className="text-secondary">{service.description}</p>

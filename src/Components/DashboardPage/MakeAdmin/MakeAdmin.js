@@ -42,7 +42,7 @@ const MakeAdmin = () => {
                 <label htmlFor="email">Email</label>
               </h5>
               <div className="row">
-                <div className="col-6">
+                <div className="col-md-6">
                   <input
                     onBlur={handleOnBlur}
                     id="email"
@@ -52,7 +52,7 @@ const MakeAdmin = () => {
                     placeholder="jon@gmail.com"
                   />
                 </div>
-                <div className="col-3">
+                <div className="col-md-3">
                   <button
                     style={{ height: "50px" }}
                     className="btn btn-success px-5 mb-2"

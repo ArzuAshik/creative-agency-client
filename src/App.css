@@ -28,8 +28,8 @@
 .user-logout {
   display: none;
   position: absolute;
-  top: 35px;
-  right: 28px;
+  top: 40px;
+  right: 20px;
 }
 
 .user-name:hover .user-logout {

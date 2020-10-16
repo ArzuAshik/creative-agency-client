@@ -56,7 +56,7 @@ const AddService = () => {
               style={{ borderRadius: "1.25rem" }}
               className="row p-4 bg-white"
             >
-              <div className="col-6">
+              <div className="col-md-6">
                 <h5>
                   <label htmlFor="service-title">Service Title</label>
                 </h5>
@@ -83,7 +83,10 @@ const AddService = () => {
                   placeholder="Enter Description"
                 />
               </div>
-              <div className="col-6 custom-file w-50">
+              <div
+                style={{ minHeight: "100px" }}
+                className="col-md-6 custom-file w-md-50"
+              >
                 <h5>Icon</h5>
                 <label htmlFor="upload-file">Upload Image</label>
                 <input

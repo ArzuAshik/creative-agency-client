@@ -35,14 +35,14 @@ const OrderedService = ({ service }) => {
   }, []);
   return (
     <>
-      <div className="col-md-5 p-3 m-2 rounded bg-white">
+      <div className="col-lg-5 p-3 m-2 rounded bg-white">
         <div className="d-flex justify-content-between align-items-center">
           <div>
             <img
               height="74"
               className="rounded-circle"
               src={`data:image/jpeg;base64,${icon}`}
-              alt=""
+              alt="Service"
             />
           </div>
           <div>

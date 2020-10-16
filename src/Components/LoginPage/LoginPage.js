@@ -50,7 +50,11 @@ const LoginPage = () => {
   return (
     <div className="login">
       <Link to="/">
-        <img className="d-block mx-auto my-5" src={logo} alt="" />
+        <img
+          className="d-block mx-auto my-5"
+          src={logo}
+          alt="Creative Agency"
+        />
       </Link>
       <section className="login-area p-5">
         <h3 className="text-center mb-5">Login With</h3>

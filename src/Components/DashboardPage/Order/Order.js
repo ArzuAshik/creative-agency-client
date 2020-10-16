@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { UserContext } from "../../../App";
 import DashboardHeader from "../DashboardHeader/DashboardHeader";
 import UserSidebar from "../UserSidebar/UserSidebar";
+import RingLoader from "react-spinners/RingLoader";
 import "./Order.css";
 
 const Order = () => {
@@ -10,7 +11,14 @@ const Order = () => {
   const [loginUser, setLoginUser] = useContext(UserContext);
   const [fileInput, setFileInput] = useState(null);
   const [formInput, setFormInput] = useState({});
+  const [loading, setLoading] = useState(false);
   let history = useHistory();
+
+  const override = `
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
   const serviceID = useParams().serviceID;
   useEffect(() => {
@@ -50,6 +58,7 @@ const Order = () => {
 
   const handleSubmit = (e) => {
     if (formInput.details && formInput.price && fileInput) {
+      setLoading(true);
       //submit form
       const formData = new FormData();
       formData.append("file", fileInput);
@@ -78,73 +87,81 @@ const Order = () => {
         <div className="col-9 p-5 dashboard-content">
           <div className="row">
             <div className="col-6">
-              <form action="#">
-                <input
-                  name="name"
-                  onBlur={handleOnBlur}
-                  required
-                  className="form-control p-4"
-                  type="text"
-                  placeholder="Your name / company’s name"
-                  defaultValue={loginUser.name}
-                />
-                <input
-                  readOnly
-                  name="email"
-                  required
-                  className="form-control p-4 my-2 bg-white"
-                  type="text"
-                  placeholder="Your email address"
-                  defaultValue={loginUser.email}
-                />
-                <input
-                  readOnly
-                  name="service"
-                  required
-                  className="form-control p-4 my-2 bg-white"
-                  type="text"
-                  placeholder="Service"
-                  defaultValue={formInput.service}
-                />
-                <textarea
-                  name="details"
-                  onBlur={handleOnBlur}
-                  required
-                  rows="5"
-                  className="form-control p-4 my-2"
-                  type="text"
-                  placeholder="Project Details"
-                />
-                <div className="row">
-                  <div className="col-6">
-                    <input
-                      name="price"
-                      onBlur={handleOnBlur}
-                      required
-                      className="form-control p-4"
-                      type="text"
-                      placeholder="Price"
-                    />
+              <RingLoader
+                css={override}
+                loading={loading}
+                size={200}
+                color={"orange"}
+              />
+              {!loading && (
+                <form action="#">
+                  <input
+                    name="name"
+                    onBlur={handleOnBlur}
+                    required
+                    className="form-control p-4"
+                    type="text"
+                    placeholder="Your name / company’s name"
+                    defaultValue={loginUser.name}
+                  />
+                  <input
+                    readOnly
+                    name="email"
+                    required
+                    className="form-control p-4 my-2 bg-white"
+                    type="text"
+                    placeholder="Your email address"
+                    defaultValue={loginUser.email}
+                  />
+                  <input
+                    readOnly
+                    name="service"
+                    required
+                    className="form-control p-4 my-2 bg-white"
+                    type="text"
+                    placeholder="Service"
+                    defaultValue={formInput.service}
+                  />
+                  <textarea
+                    name="details"
+                    onBlur={handleOnBlur}
+                    required
+                    rows="5"
+                    className="form-control p-4 my-2"
+                    type="text"
+                    placeholder="Project Details"
+                  />
+                  <div className="row">
+                    <div className="col-6">
+                      <input
+                        name="price"
+                        onBlur={handleOnBlur}
+                        required
+                        className="form-control p-4"
+                        type="text"
+                        placeholder="Price"
+                      />
+                    </div>
+                    <div className="col-6 custom-file">
+                      <label htmlFor="upload-file">Upload Project File</label>
+                      <input
+                        name="file"
+                        onChange={handleFile}
+                        required
+                        id="upload-file"
+                        type="file"
+                      />
+                    </div>
                   </div>
-                  <div className="col-6 custom-file">
-                    <label htmlFor="upload-file">Upload Project File</label>
-                    <input
-                      name="file"
-                      onChange={handleFile}
-                      required
-                      id="upload-file"
-                      type="file"
-                    />
-                  </div>
-                </div>
-                <button
-                  onClick={handleSubmit}
-                  type="submit"
-                  className="btn bg-white px-5 py-2 mt-2 border"
-                >
-                  Send
-                </button>
-              </form>
+                  <button
+                    onClick={handleSubmit}
+                    type="submit"
+                    className="btn bg-white px-5 py-2 mt-2 border"
+                  >
+                    Send
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </div>

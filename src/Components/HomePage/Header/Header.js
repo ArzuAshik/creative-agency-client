@@ -7,8 +7,8 @@ const Header = () => {
   return (
     <>
       <header className="header">
+        <Navbar />
         <div className="container">
-          <Navbar />
           <div className="row mt-5 header-content d-flex justify-content-center align-items-center">
             <div className="col-md-6 pl-5">
               <h1 className="font-weight-bolder mr-lg-5 mb-3">
@@ -23,7 +23,7 @@ const Header = () => {
               </a>
             </div>
             <div className="col-md-6">
-              <img className="img-fluid" src={homeHero} alt="" />
+              <img className="img-fluid" src={homeHero} alt="Banner" />
             </div>
           </div>
         </div>

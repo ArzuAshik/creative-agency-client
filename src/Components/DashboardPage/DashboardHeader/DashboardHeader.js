@@ -34,10 +34,10 @@ const DashboardHeader = () => {
     <div className="row mt-5">
       <div className="col-3 ml-5">
         <Link to="/">
-          <img src={logo} alt="" />
+          <img src={logo} alt="Creative Agency" />
         </Link>
       </div>
-      <div className="col-8 d-flex justify-content-between">
+      <div className="col-8 mx-auto d-flex justify-content-between">
         <h4>{pageName}</h4>
         <h4 className="user-name">
           <img
