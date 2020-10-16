@@ -40,16 +40,16 @@ const Works = () => {
         Here are some of <span className="brand-color">our works</span>
       </h2>
       <OwlCarousel className="slider-items owl-carousel" {...options}>
-        <div class="item">
+        <div className="item">
           <img src={work1} />
         </div>
-        <div class="item">
+        <div className="item">
           <img src={work2} />
         </div>
-        <div class="item">
+        <div className="item">
           <img src={work4} />
         </div>
-        <div class="item">
+        <div className="item">
           <img src={work5} />
         </div>
       </OwlCarousel>

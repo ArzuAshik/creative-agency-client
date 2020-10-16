@@ -86,7 +86,7 @@ const Order = () => {
                   className="form-control p-4"
                   type="text"
                   placeholder="Your name / company’s name"
-                  value={loginUser.name}
+                  defaultValue={loginUser.name}
                 />
                 <input
                   readOnly
@@ -95,7 +95,7 @@ const Order = () => {
                   className="form-control p-4 my-2 bg-white"
                   type="text"
                   placeholder="Your email address"
-                  value={loginUser.email}
+                  defaultValue={loginUser.email}
                 />
                 <input
                   readOnly
@@ -104,7 +104,7 @@ const Order = () => {
                   className="form-control p-4 my-2 bg-white"
                   type="text"
                   placeholder="Service"
-                  value={formInput.service}
+                  defaultValue={formInput.service}
                 />
                 <textarea
                   name="details"

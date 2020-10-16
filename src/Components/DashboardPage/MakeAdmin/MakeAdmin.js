@@ -39,7 +39,7 @@ const MakeAdmin = () => {
           <div style={{ borderRadius: "1.25rem" }} className="row p-4 bg-white">
             <form action="#" className="w-100" onSubmit={handleSubmit}>
               <h5>
-                <label for="email">Email</label>
+                <label htmlFor="email">Email</label>
               </h5>
               <div className="row">
                 <div className="col-6">

@@ -37,11 +37,18 @@ const Services = () => {
               </thead>
               <tbody>
                 {orders.length > 0 ? (
-                  orders.map((info) => <SingleService info={info} />)
+                  orders.map((info) => (
+                    <SingleService info={info} key={info._id} />
+                  ))
                 ) : (
-                  <td colspan="5" className="text-center display-4 text-muted">
-                    Empty
-                  </td>
+                  <tr>
+                    <td
+                      colSpan="5"
+                      className="text-center display-4 text-muted"
+                    >
+                      Empty
+                    </td>
+                  </tr>
                 )}
               </tbody>
             </table>

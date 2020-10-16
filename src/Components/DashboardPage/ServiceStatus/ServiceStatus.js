@@ -27,7 +27,7 @@ const ServiceStatus = () => {
         <div className="col-9 p-5 dashboard-content">
           <div className="row">
             {serviceList.map((service) => (
-              <OrderedService service={service} />
+              <OrderedService service={service} key={service._id} />
             ))}
           </div>
         </div>

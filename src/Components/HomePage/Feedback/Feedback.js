@@ -10,13 +10,13 @@ const Feedback = () => {
       .then((data) => setFeedbacks(data));
   }, []);
   return (
-    <section class="container feedback-section">
+    <section className="container feedback-section">
       <h2 className="text-center mb-5">
         Clients <span className="brand-color">Feedback</span>
       </h2>
       <div className="row">
         {feedbacks.map((feedback) => (
-          <Feedbacks feedback={feedback} />
+          <Feedbacks feedback={feedback} key={feedback._id} />
         ))}
       </div>
     </section>

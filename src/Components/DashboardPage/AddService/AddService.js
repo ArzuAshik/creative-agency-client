@@ -58,7 +58,7 @@ const AddService = () => {
             >
               <div className="col-6">
                 <h5>
-                  <label for="service-title">Service Title</label>
+                  <label htmlFor="service-title">Service Title</label>
                 </h5>
                 <input
                   onBlur={handleOnBlur}
@@ -70,7 +70,7 @@ const AddService = () => {
                   placeholder="Enter Title"
                 />
                 <h5>
-                  <label for="description">Description</label>
+                  <label htmlFor="description">Description</label>
                 </h5>
                 <textarea
                   onBlur={handleOnBlur}
@@ -85,7 +85,7 @@ const AddService = () => {
               </div>
               <div className="col-6 custom-file w-50">
                 <h5>Icon</h5>
-                <label for="upload-file">Upload Image</label>
+                <label htmlFor="upload-file">Upload Image</label>
                 <input
                   onChange={handleFile}
                   required
