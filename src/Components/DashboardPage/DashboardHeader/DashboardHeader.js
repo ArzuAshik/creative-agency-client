@@ -40,7 +40,13 @@ const DashboardHeader = () => {
       <div className="col-8 d-flex justify-content-between">
         <h4>{pageName}</h4>
         <h4 className="user-name">
-          {loginUser.name || "User Name"}
+          <img
+            style={{ height: "50px", width: "50px", marginRight: "10px" }}
+            className="img-fluid rounded-circle"
+            src={loginUser.photoURL}
+            alt={loginUser.name}
+          />
+          {loginUser.name}
           <button
             onClick={handleSignOut}
             className="btn btn-danger user-logout"

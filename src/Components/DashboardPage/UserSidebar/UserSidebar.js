@@ -14,9 +14,9 @@ const UserSidebar = () => {
     <div className="sidebar">
       <ul>
         <li className={page[2] === "order" ? "sidebar-active" : undefined}>
-          <Link to="/dashboard/order">
+          <a href="/#services">
             <FontAwesomeIcon icon={faShoppingCart} /> Order
-          </Link>
+          </a>
         </li>
         <li
           className={

@@ -4,16 +4,27 @@ import { UserContext } from "../../../App";
 import DashboardHeader from "../DashboardHeader/DashboardHeader";
 import AdminSidebar from "../AdminSidebar/AdminSidebar";
 import SingleService from "./SingleService";
+import RingLoader from "react-spinners/RingLoader";
 
 const Services = () => {
   document.title = "ALL Services | Creative Agency";
   const [orders, setOrders] = useState([]);
   const [loginUser, setLoginUser] = useContext(UserContext);
 
+  const [loading, setLoading] = useState(true);
+  const override = `
+  display: block;
+  margin: 0 auto;
+  border-color: #fbd062;
+`;
+
   useEffect(() => {
     fetch("https://ar-creative-agency-server.herokuapp.com/orders")
       .then((response) => response.json())
-      .then((data) => setOrders(data));
+      .then((data) => {
+        setOrders(data);
+        setLoading(false);
+      });
   }, []);
   return (
     <>
@@ -41,17 +52,27 @@ const Services = () => {
                     <SingleService info={info} key={info._id} />
                   ))
                 ) : (
-                  <tr>
-                    <td
-                      colSpan="5"
-                      className="text-center display-4 text-muted"
-                    >
-                      Empty
-                    </td>
-                  </tr>
+                  <>
+                    {!loading && (
+                      <tr>
+                        <td
+                          colSpan="5"
+                          className="text-center display-4 text-muted"
+                        >
+                          Empty
+                        </td>
+                      </tr>
+                    )}
+                  </>
                 )}
               </tbody>
             </table>
+            <RingLoader
+              css={override}
+              size={200}
+              color={"orange"}
+              loading={loading}
+            />
           </div>
         </div>
       </div>

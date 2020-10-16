@@ -3,11 +3,19 @@ import { UserContext } from "../../../App";
 import DashboardHeader from "../DashboardHeader/DashboardHeader";
 import UserSidebar from "../UserSidebar/UserSidebar";
 import OrderedService from "./OrderedService";
+import RingLoader from "react-spinners/RingLoader";
 
 const ServiceStatus = () => {
   document.title = "Service List | Creative Agency";
   const [loginUser, setLoginUser] = useContext(UserContext);
   const [serviceList, setServiceList] = useState([]);
+
+  const [loading, setLoading] = useState(true);
+  const override = `
+  display: block;
+  margin: 0 auto;
+  border-color: #fbd062;
+`;
   useEffect(() => {
     fetch("https://ar-creative-agency-server.herokuapp.com/userOrderList", {
       method: "POST",
@@ -15,7 +23,10 @@ const ServiceStatus = () => {
       body: JSON.stringify({ email: loginUser.email }),
     })
       .then((response) => response.json())
-      .then((data) => setServiceList(data));
+      .then((data) => {
+        setServiceList(data);
+        setLoading(false);
+      });
   }, []);
   return (
     <>
@@ -26,6 +37,12 @@ const ServiceStatus = () => {
         </div>
         <div className="col-9 p-5 dashboard-content">
           <div className="row">
+            <RingLoader
+              css={override}
+              size={200}
+              color={"orange"}
+              loading={loading}
+            />
             {serviceList.map((service) => (
               <OrderedService service={service} key={service._id} />
             ))}

@@ -27,7 +27,7 @@ const LoginPage = () => {
       .auth()
       .signInWithPopup(googleProvider)
       .then(function (result) {
-        var user = result.user;
+        const user = result.user;
         fetch("https://ar-creative-agency-server.herokuapp.com/user-role", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -38,6 +38,7 @@ const LoginPage = () => {
             const userInfo = {
               name: user.displayName,
               email: user.email,
+              photoURL: user.photoURL,
               ...data,
             };
             setLoginUser(userInfo);
