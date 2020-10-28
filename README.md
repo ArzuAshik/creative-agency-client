@@ -22,3 +22,10 @@ ___
 + Dashboard for admin and user
 + Loading Spinner
 + Fully Responsive
+
+___
+
+### Feel free to contact me directly at 
++ Email: arzu2050@gmail.com
++ Facebook: [https://www.facebook.com/ar.arzu12/](https://www.facebook.com/ar.arzu12/)
++ LinkedIN: https://www.linkedin.com/in/arzuashik/
